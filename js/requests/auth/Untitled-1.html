@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+/*.selected { color: blue ;} 
+li + li { color: green ;} 
+#selection .other li { color: yellow ;} 
+ul :first-child { color: magenta ;}
+#selection p { color: red ;}
+#selection li:first-child { color: cyan ;} */
+li:first-child { color: blue } /* R1 */
+div li { color: red } /* R2 */
+div.widget ul#todo { color: cyan } /* R3 */
+
+div > ul#todo .important { color: green } 
+ul li.postponed { color: inherit } 
+li+li+li { color: magenta }
+</style>
+<!--<div id =" selection ">
+    <p><a href ="">Two Lists </a></p>
+    <ul>
+        <li class =" selected ">First </li>
+        <li>Second </li>
+    </ul>
+    <ol class =" other ">
+        <li>Third </li>
+    </ol>
+</div>-->
+<div class =" widget ">
+    <ul id =" todo ">
+        <li>Buy Bread </li>
+        <li>Learn Guitar </li>
+        <li class =" important ">Pay Bills </li>
+        <li class =" postponed ">Wash Car </li>
+    </ul>
+</div>
+</body>
+</html>

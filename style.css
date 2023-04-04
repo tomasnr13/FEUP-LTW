@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f5f2;
+}
+
+ul {
+  margin-top: 1rem;
+  margin-bottom: 5px;
+}
+
+#instructions-header {
+  text-align: center;
+}
+
+#scores-header {
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+.status {
+  text-align: center;
+}
+
+main > header {
+  background-color: #000b29;
+  padding: 1em 1em;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  text-align: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+main > header li {
+  display: inline-block;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+a,
+a:visited,
+a:hover,
+a:link,
+a:active {
+  color: #edb83d;
+  text-decoration: none;
+}
+
+header > h1 {
+  color: #d70026;
+}
+
+li > h2 {
+  color: #d70026;
+}
+
+.board {
+  margin: 50px auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-flow: row;
+  width: 50vw;
+  height: 30vh;
+  background: #a47449;
+  border-radius: 20px;
+}
+
+.rows {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+}
+.store {
+  border-radius: 40px;
+}
+.row,
+.store {
+  flex: 1;
+}
+.row {
+  display: flex;
+}
+.row.player-two {
+  flex-direction: row-reverse;
+}
+.pit,
+.store {
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  cursor: default;
+  position: relative;
+}
+
+.pitAndTracker,
+.storeAndTracker {
+  flex: 1;
+  display: flex;
+  border-radius: 40%;
+  position: relative;
+}
+
+.tracker.player-one,
+.tracker.player-two {
+  display: flex;
+  align-items: center;
+}
+
+.pit {
+  width: 80%;
+  height: 80%;
+  border-radius: 40%;
+}
+.store {
+  width: 80%;
+}
+
+[data-player="one"] .row.player-one .pit,
+[data-player="two"] .row.player-two .pit {
+  cursor: pointer;
+}
+[data-player="two"] .status,
+[data-player="one"] .status {
+  color: #d70026;
+}
+
+#page-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#center-main {
+  display: flex;
+}
+
+.seed {
+  background: radial-gradient(rgb(180, 42, 42, 1), #812d2a);
+  height: 22px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  left: 75%;
+}
+
+table.scoreboard {
+  margin: auto;
+  width: 200px;
+  height: 100px;
+  border-style: solid;
+}
+
+table.scoreboard caption {
+  background-color: brown;
+  color: yellow;
+}
+
+table.scoreboard tr {
+  color: black;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #f8f5f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  position: relative;
+  margin: 6% auto; /* 15% from the top and centered */
+  padding: 0;
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 75%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+input {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+form {
+  vertical-align: middle;
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 45em;
+}
+
+/* The Close Button */
+.modal-close {
+  color: #aaa;
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: right;
+  font-size: 28px;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* CSS */
+button {
+  background-color: #000b29;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.footerbutton {
+  background-color: #000b29;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 9px 20px 8px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+button:hover,
+button:focus {
+  opacity: 0.75;
+}
+
+.authentication {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: inherit;
+  height: inherit;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+.input-container label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 16px;
+  color: #000b29;
+  transition: all 0.5s ease-in-out;
+}
+.input-container input {
+  border: 0;
+  border-bottom: 1px solid #555;
+  background: transparent;
+  width: 100%;
+  padding: 8px 0 5px 0;
+  font-size: 16px;
+  color: #000b29;
+}
+.input-container input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #000b29;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#ranking-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#ranking-table td,
+#ranking-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#ranking-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#ranking-table tr:hover {
+  background-color: #ddd;
+}
+
+#ranking-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #000b29;
+  color: white;
+}

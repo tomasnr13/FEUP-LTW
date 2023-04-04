@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mancala</title>
+    <meta name="description" content="The best game you have never heard of" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/modal/instructions-modal.js" defer></script>
+    <script src="./js/modal/auth-modal.js" defer></script>
+    <script src="./js/modal/scores-modal.js" defer></script>
+    <script type="module" src="./js/requests/auth/login.js" defer></script>
+    <script type="module" src="./js/requests/auth/register.js" defer></script>
+    <script type="module" src="./js/requests/join.js"></script>
+    <script type="module" src="./js/requests/ranking.js"></script>
+  </head>
+  <body>
+    <main id="main">
+      <section id="auth-modal" class="modal">
+        <article class="modal-content">
+          <div class="authentication">
+            <form method="post" id="login-form" name="login-form">
+              <h2>Login</h2>
+              <br />
+              <div class="input-container">
+                <input
+                  type="text"
+                  name="username-login"
+                  id="username-login"
+                  required=""
+                />
+                <label for="username-login">Username</label>
+              </div>
+              <div class="input-container">
+                <input
+                  type="password"
+                  name="password-login"
+                  id="password-login"
+                  required=""
+                />
+                <label for="password-login">Password</label>
+              </div>
+              <br />
+              <br />
+              <button type="button" id="login-submit">Submit</button>
+            </form>
+            <form method="post" id="register-form" name="register-form">
+              <h2>Register</h2>
+              <br />
+              <div class="input-container">
+                <input
+                  type="text"
+                  name="username-register"
+                  id="username-register"
+                  required=""
+                />
+                <label for="username-register">Username</label>
+              </div>
+              <div class="input-container">
+                <input
+                  type="password"
+                  name="password-register"
+                  id="password-register"
+                  required=""
+                />
+                <label for="password-register">Password</label>
+              </div>
+              <br />
+              <br />
+              <button type="button" id="register-submit">Submit</button>
+            </form>
+          </div>
+        </article>
+      </section>
+      <section id="myModal" class="modal">
+        <article class="modal-content">
+          <form id="seed-form" name="seed-form">
+            <div class="input-container">
+              <input type="number" name="pitNo" id="pitNo" placeholder="6" />
+              <label for="pitNo">Pits for each player</label>
+            </div>
+            <br />
+            <script>
+              function onlyOne(cb) {
+                let cbs = document.getElementsByName("check");
+                cbs.forEach((item) => {
+                  if (item !== cb) {
+                    item.checked = false;
+                  }
+                });
+              }
+            </script>
+            <div class="input-container">
+              <input
+                type="number"
+                name="check"
+                id="seedNo"
+                placeholder="4"
+                onclick="(function(){onlyOne(this);})"
+              />
+              <label for="seedNo">Seeds on each pit</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="ai_mode"
+                onclick="onlyOne(this)"
+              />
+              <label for="ai_mode">AI mode</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="pvp_mode"
+                onclick="onlyOne(this)"
+                checked
+              />
+              <label for="seedNo">PVP mode</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="local_mode"
+                onclick="onlyOne(this)"
+              />
+              <label for="local_mode">Local mode</label>
+            </div>
+            <div class="input-container">
+              <input type="checkbox" name="check" id="ai_intelligence" />
+              <label for="ai_intelligence">Smart AI</label>
+            </div>
+            <br />
+            <br />
+            <button type="button" id="parameters">Submit</button>
+          </form>
+        </article>
+      </section>
+      <section id="scores-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="scores-modal-close">×</span>
+          <div class="scores-content">
+            <h2 id="scores-header">Scores</h2>
+            <div id="scores_d"></div>
+          </div>
+        </article>
+      </section>
+      <section id="ranking-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="ranking-modal-close">×</span>
+          <div class="ranking-content">
+            <h2 id="ranking-header">Online Ranking</h2>
+            <table id="ranking-table">
+              <tr>
+                <th>Name</th>
+                <th>Games</th>
+                <th>Victories</th>
+              </tr>
+            </table>
+          </div>
+        </article>
+      </section>
+      <section id="instructions-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="instructions-modal-close">×</span>
+          <div class="instructions-content">
+            <h2 id="instructions-header">Instructions</h2>
+            <ul>
+              <li>
+                Board:
+                <ul>
+                  <li>
+                    Each player controls the cavities on their side, as well as
+                    the storage on their right. Player one will play on the
+                    bottom, and player 2 on top
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Way of the game:
+                <ul>
+                  <li>
+                    Players sow their seeds in an alternating fashion, starting
+                    on their cavities. To sow, you click on the cavity you wish
+                    to sow.
+                  </li>
+                  <li>
+                    Depending on the position the last seed was sown, the player
+                    can either play again, or his turn ends. seeds
+                  </li>
+                  <li>
+                    The game ends when one of the players has no more seeds on
+                    his side of the board and cannot make any move
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Sowing
+                <ul>
+                  <li>Chose a cavity on your side</li>
+                  <li>Collect all seeds from it</li>
+                  <li>
+                    Place one seed on the following cavities (The sowing is made
+                    in a counter-clockwise fashion)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Keep sowing
+                <ul>
+                  <li>
+                    If the following cavity is your storage, place a seed on it
+                    too
+                  </li>
+                  <li>
+                    If there are seeds remaining, keep sowing on the opponents
+                    side
+                  </li>
+                  <li>
+                    If it reaches the opponents storage, <b>do not</b> sow
+                    there, and keep on to your side of the board
+                  </li>
+                  <li>
+                    You can keep sowing on your side if there are seeds
+                    remaining
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Last seed sown
+                <ul>
+                  <li>
+                    If your last seed was sown in your storage, you can play
+                    again
+                  </li>
+                  <li>
+                    If your last seed was sown in one of your empty cavities,
+                    transfer to your storage:
+                  </li>
+                  <ul>
+                    <li>
+                      The seeds from the opposing cavity, that belong to the
+                      opponent
+                    </li>
+                    <li>And the last seed you have sown</li>
+                  </ul>
+                </ul>
+              </li>
+              <li>
+                End
+                <ul>
+                  <li>
+                    The game ends when one of the players can't play (because
+                    all of his cavities are empty)
+                  </li>
+                  <li>
+                    The opposing player collects all the seeds from his cavities
+                    and transfers them to his storage
+                  </li>
+                  <li>
+                    The player with more seeds on his storage wins the game
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+      <header>
+        <h1>Mancala: The best game you never heard of</h1>
+        <nav>
+          <ul id="navbar">
+            <li>
+              <a id="instructions" href="#">Instructions</a>
+            </li>
+            <li>
+              <a id="scoreboard" href="#">Online Scoreboard</a>
+            </li>
+            <li>
+              <a id="scores" href="#">Local Scores</a>
+            </li>
+            <li>
+              <a href="#">Logout</a>
+            </li>
+            <li>
+              <h2 id="username"></h2>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section id="page-center" data-player="one">
+        <div id="center-main">
+          <canvas id="canvas" width="400" height="400">
+            <script src="./js/canvas/canvas.js"></script>
+          </canvas>
+          <div class="board">
+            <div class="storeAndTracker">
+              <div class="tracker player-two"></div>
+              <div class="player-two store"></div>
+            </div>
+            <div class="rows">
+              <div class="row player-two"></div>
+              <div class="row player-one"></div>
+            </div>
+            <div class="storeAndTracker">
+              <div class="player-one store"></div>
+              <div class="tracker player-one"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="status">
+          It is player <span class="current-player">one</span>'s turn
+        </h2>
+      </section>
+      <button class="footerbutton" id="reset">End Game</button>
+    </main>
+  </body>
+</html>
